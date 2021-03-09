@@ -15,8 +15,14 @@ namespace Certify.WebApp.Data
         {
         }
 
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Course>().HasOne(x => x.Owner).WithMany(x => x.CoursesCreated);
+            builder.Entity<Certificate>().HasOne(x => x.Student).WithMany(x => x.Certificates);
+
             builder.Entity<Role>().HasData(
                 new List<Role>
                 {

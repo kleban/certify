@@ -9,5 +9,7 @@ namespace Certify.Core
 {
     public class User : IdentityUser
     {
+        public ICollection<Course> CoursesCreated { get; set; }
+        public ICollection<Certificate> Certificates { get; set; }
     }
 }
