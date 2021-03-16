@@ -1,4 +1,5 @@
 ﻿using Certify.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,26 @@ namespace Certify.Repositories
             await _ctx.SaveChangesAsync();
 
             return newCourse.Entity.Id;
+        }
+
+        public async Task<List<Course>> GetMyCoursesAsync(string userName)
+        {
+            return await _ctx.Courses.Include(x=> x.Certifictes).Where(x => x.Owner.UserName == userName).ToListAsync();
+        }
+
+        public async Task<Course> GetCourseAsync(int courseId, string userName)
+        {
+            if(await _accessAllowed(courseId, userName))
+            {
+                return await _ctx.Courses.Include(x => x.Owner).FirstAsync(x => x.Id == courseId);
+            }
+
+            throw new NotImplementedException(); // переписати
+        }
+
+        public async Task<bool> _accessAllowed(int courseId, string userName)
+        {
+            return await _ctx.Courses.FirstOrDefaultAsync(x => x.Owner.UserName == userName && x.Id == courseId) != null;
         }
     }
 }

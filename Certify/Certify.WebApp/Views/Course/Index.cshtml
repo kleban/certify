@@ -1,0 +1,39 @@
+﻿@model List<Certify.Core.Course>
+
+@{
+}
+
+<h1>Мої курси</h1>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover table-striped">
+        @foreach(var c in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@c.Title</strong><br />
+                            <div>@c.Description</div>
+                        </td>
+                        <td>
+                            <span class="text-muted">Початок:</span>
+                            <strong>@c.StartDate.ToString("dd.MM.yyyy")</strong><br />
+                            <span class="text-muted">Завершення:</span>
+                            <strong>@c.EndDate.ToString("dd.MM.yyyy")</strong><br />
+                        </td>
+                        <td>@c.CertificatesCount</td>
+                        <td style="width:200px">
+                            <a href="certificate/create/@c.Id" class="btn btn-sm btn-primary btn-block"><i class="fas fa-medal"></i> Додати сертифікат</a>
+                            <a href="certificate/create/@c.Id" class="btn btn-sm btn-success btn-block"><i class="fas fa-list"></i> Сертифікати</a>
+                            <a href="certificate/create/@c.Id" class="btn btn-sm btn-danger btn-block"><i class="fas fa-trash"></i> Видалити курс</a>
+                        </td>
+                    </tr>
+                }
+    </table> 
+}
+else
+{
+    <div class="alert alert-danger">
+        Курси відсутні.
+    </div>
+}

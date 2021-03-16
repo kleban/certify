@@ -1,5 +1,6 @@
 ﻿using Certify.Core;
 using Certify.Repositories;
+using Certify.Repositories.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,8 +24,8 @@ namespace Certify.WebApp.Controllers
 
         public async Task<IActionResult> Do()
         {
-            if (!_courseRepository.Any())
-            {
+          //  if (!_courseRepository.Any())
+          //  {
                 var courseId = await _courseRepository.CreateAsync(
                     new Course { 
                         Title = "Тестовий курс №1",
@@ -37,6 +38,7 @@ namespace Certify.WebApp.Controllers
                 await _certificateRepository.CreateAsync(
                     new Certificate
                     {
+                        Id = CertificateDefaultIdGenerator.Generate(await _courseRepository.GetCourseAsync(courseId, User.Identity.Name), 0),
                         StudentFirstName = "Іван",
                         StudentLastName = "Іванов",
                         ImagePath = "wwwroot/certificates/initial.png",                        
@@ -45,12 +47,13 @@ namespace Certify.WebApp.Controllers
                 await _certificateRepository.CreateAsync(
                   new Certificate
                   {
+                      Id = CertificateDefaultIdGenerator.Generate(await _courseRepository.GetCourseAsync(courseId, User.Identity.Name), 1),
                       StudentFirstName = "Іван",
-                      StudentLastName = "Іванов",
+                      StudentLastName = "Іванов2",
                       ImagePath = "wwwroot/certificates/initial.png",
                   }, courseId);
 
-            }
+           // }
             return Ok();
         }
     }

@@ -16,10 +16,16 @@ namespace Certify.Core
 
         [Required(ErrorMessage = "Це поле обов'язкове")]
         public string Title { get; set; }
-
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public User Owner { get; set; }
+        public virtual ICollection<Certificate> Certifictes { get; set; }
+
+        [NotMapped]
+        public int CertificatesCount
+        {
+            get { return (Certifictes??new List<Certificate>()).Count; }
+        }
     }
 }

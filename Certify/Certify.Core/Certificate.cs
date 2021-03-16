@@ -12,7 +12,6 @@ namespace Certify.Core
     {
         [Key]
         public string Id { get; set; }
-
         public Course Course { get; set; }
         public User Student { get; set; }
         public string StudentFirstName { get; set; }

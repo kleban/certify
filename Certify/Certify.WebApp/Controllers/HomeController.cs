@@ -32,8 +32,10 @@ namespace Certify.WebApp.Controllers
             string contentRootPath = _webHostEnvironment.ContentRootPath;
 
             string path = "";
-            path = Path.Combine(webRootPath, "CSS");
+            path = Path.Combine(webRootPath, "certificates");
             //or path = Path.Combine(contentRootPath , "wwwroot" ,"CSS" );
+
+            ViewBag.Path = contentRootPath;
 
             return View();
         }

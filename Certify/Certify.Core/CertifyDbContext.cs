@@ -67,8 +67,12 @@ namespace Certify.Core
                     {
                         RoleId = "admin_role_id",
                         UserId = "admin_user_id"
-                    }
-                }
+                    },
+                    new IdentityUserRole<string>
+                    {
+                        RoleId = "teacher_role_id",
+                        UserId = "admin_user_id"
+                    }}
                 );          
 
             base.OnModelCreating(builder);

@@ -4,14 +4,16 @@ using Certify.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Certify.Core.Migrations
 {
     [DbContext(typeof(CertifyDbContext))]
-    partial class CertifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316114600_update_roles")]
+    partial class update_roles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,21 +110,21 @@ namespace Certify.Core.Migrations
                         new
                         {
                             Id = "admin_role_id",
-                            ConcurrencyStamp = "4120646d-a5ef-4524-9d85-d8476be7d1e6",
+                            ConcurrencyStamp = "554422dd-a517-47c4-8d44-ef45698d2f2d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "teacher_role_id",
-                            ConcurrencyStamp = "53238598-b6b2-415a-9e64-68878d62c14b",
+                            ConcurrencyStamp = "e42ef533-62b0-4eff-864e-3475902adbe3",
                             Name = "Teacher",
                             NormalizedName = "TEACHER"
                         },
                         new
                         {
                             Id = "student_role_id",
-                            ConcurrencyStamp = "88becb9d-8d98-4a8a-889a-1f2119e628e4",
+                            ConcurrencyStamp = "5037f9dc-159d-4731-8c64-4f23b60055a9",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -203,14 +205,14 @@ namespace Certify.Core.Migrations
                         {
                             Id = "admin_user_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de111363-fec6-4e9e-9d9a-56d3d44e6d6e",
+                            ConcurrencyStamp = "7b4cb1e0-e796-4a5a-9b29-26baecea81ab",
                             Email = "admin@dataclass.org.ua",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN@DATACLASS.ORG.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGsCct1XCs5botPG+ENbMzM2dFJtbEt+Dxzq8p6VZ9ebGfDWabu0ITvp6Gteo7ktdA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPWrRWjpdGOL+5EgumWjqPnjEtdqEfp9UeF49y+G3UfkAX6t63YayGv2L+lVFJe5oQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9f21d22-6a3d-4493-aa2c-ea5349fa11a9",
+                            SecurityStamp = "fe67aa1b-ba9d-4a09-9112-0e3a7fc6724e",
                             TwoFactorEnabled = false,
                             UserName = "admin@dataclass.org.ua"
                         });
@@ -339,7 +341,7 @@ namespace Certify.Core.Migrations
             modelBuilder.Entity("Certify.Core.Certificate", b =>
                 {
                     b.HasOne("Certify.Core.Course", "Course")
-                        .WithMany("Certifictes")
+                        .WithMany()
                         .HasForeignKey("CourseId");
 
                     b.HasOne("Certify.Core.User", "Student")
@@ -409,11 +411,6 @@ namespace Certify.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Certify.Core.Course", b =>
-                {
-                    b.Navigation("Certifictes");
                 });
 
             modelBuilder.Entity("Certify.Core.User", b =>
