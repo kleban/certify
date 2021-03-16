@@ -33,6 +33,23 @@ namespace Certify.WebApp.Controllers
                         EndDate = DateTime.Now.AddDays(-42)                        
                     },
                     User.Identity.Name);
+
+                await _certificateRepository.CreateAsync(
+                    new Certificate
+                    {
+                        StudentFirstName = "Іван",
+                        StudentLastName = "Іванов",
+                        ImagePath = "wwwroot/certificates/initial.png",                        
+                    }, courseId);
+
+                await _certificateRepository.CreateAsync(
+                  new Certificate
+                  {
+                      StudentFirstName = "Іван",
+                      StudentLastName = "Іванов",
+                      ImagePath = "wwwroot/certificates/initial.png",
+                  }, courseId);
+
             }
             return Ok();
         }

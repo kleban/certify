@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Certify.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,18 @@ namespace Certify.Repositories
 {
     public class CertificateRepository
     {
+        private readonly CertifyDbContext _ctx;
 
+        public CertificateRepository(CertifyDbContext ctx)
+        {
+            _ctx = ctx;
+        }
+
+        public async Task CreateAsync(Certificate certificate, int courseId)
+        {
+            certificate.Course = _ctx.Courses.First(x => x.Id == courseId);
+            await _ctx.Certificates.AddAsync(certificate);
+            await _ctx.SaveChangesAsync();
+        }
     }
 }

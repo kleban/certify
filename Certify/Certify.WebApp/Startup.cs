@@ -37,6 +37,8 @@ namespace Certify.WebApp
 
             services.AddEntityFrameworkSqlServer();
             services.AddScoped<UserRepository>();
+            services.AddScoped<CertificateRepository>();
+            services.AddScoped<CourseRepository>();
             //services.AddScoped<UserManager<User>>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
