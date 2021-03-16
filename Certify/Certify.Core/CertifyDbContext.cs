@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Certify.WebApp.Data
+namespace Certify.Core
 {
     public class CertifyDbContext : IdentityDbContext<User, Role, string>
     {
@@ -69,7 +69,7 @@ namespace Certify.WebApp.Data
                         UserId = "admin_user_id"
                     }
                 }
-                );
+                );          
 
             base.OnModelCreating(builder);
         }

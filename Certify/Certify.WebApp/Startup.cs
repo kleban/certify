@@ -1,5 +1,5 @@
 using Certify.Core;
-using Certify.WebApp.Data;
+using Certify.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,11 +33,16 @@ namespace Certify.WebApp
                     Configuration.GetConnectionString("SqlServerConnection"),
                     x => x.MigrationsAssembly("Certify.Core")));
 
+            //options.UseSqlServer(connection, b => b.MigrationsAssembly("Certify.WebApp"))
+
             services.AddEntityFrameworkSqlServer();
+            services.AddScoped<UserRepository>();
+            //services.AddScoped<UserManager<User>>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<Role>()
                 .AddEntityFrameworkStores<CertifyDbContext>();
 
             services.AddControllersWithViews();

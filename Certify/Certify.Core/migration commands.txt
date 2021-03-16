@@ -1,4 +1,4 @@
-﻿add-migration InitialMigration //on WebApp
+﻿add-migration initial -project Certify.Core
 update-database // on WebApp
 
 
