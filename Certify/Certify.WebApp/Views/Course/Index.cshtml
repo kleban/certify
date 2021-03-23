@@ -23,9 +23,13 @@
                         </td>
                         <td>@c.CertificatesCount</td>
                         <td style="width:200px">
+                            <a href="course/details/@c.Id" class="btn btn-sm btn-dark btn-block"><i class="fas fa-eye"></i> Деталі/інфо</a>
                             <a href="certificate/create/@c.Id" class="btn btn-sm btn-primary btn-block"><i class="fas fa-medal"></i> Додати сертифікат</a>
                             <a href="certificate/index/@c.Id" class="btn btn-sm btn-success btn-block"><i class="fas fa-list"></i> Сертифікати</a>
-                            <a href="course/remove/@c.Id" class="btn btn-sm btn-danger btn-block"><i class="fas fa-trash"></i> Видалити курс</a>
+                            @if (c.CertificatesCount == 0)
+                            {
+                                <a href="course/remove/@c.Id" class="btn btn-sm btn-danger btn-block"><i class="fas fa-trash"></i> Видалити курс</a>
+                            }
                         </td>
                     </tr>
                 }

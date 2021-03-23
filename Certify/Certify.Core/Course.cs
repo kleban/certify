@@ -14,9 +14,13 @@ namespace Certify.Core
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Display(Name = "Назва курсу")]
         [Required(ErrorMessage = "Це поле обов'язкове")]
         public string Title { get; set; }
+
+        [Display(Name = "Опис курсу")]
         public string Description { get; set; }
+
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public User Owner { get; set; }

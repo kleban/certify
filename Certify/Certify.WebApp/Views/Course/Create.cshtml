@@ -1,0 +1,62 @@
+﻿@model Certify.Core.Course
+
+@{
+    ViewData["Title"] = "Новий курс";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href="/courses" class="btn btn-light float-right"><i class="fas fa-chevron-left"></i> До списку</a>
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form asp-action="Create">    
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Title" class="control-label"></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <input asp-for="Title" class="form-control" />
+            <small asp-validation-for="Title" class="text-danger"></small>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                <small>Введіть повну офіційну назву курсу.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Description" class="control-label"></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <small asp-validation-for="Description" class="text-danger"></small>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                <small>Введіть короткий опис навчального курсу.</small>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-book-open"></i> Створити</button>
+            </div>
+        </div>       
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
