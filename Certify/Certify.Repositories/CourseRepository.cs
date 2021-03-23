@@ -31,6 +31,16 @@ namespace Certify.Repositories
             return newCourse.Entity.Id;
         }
 
+        public async Task<Course> GetFullCourseAsync(int id, string userName)
+        {
+            if (await _accessAllowed(id, userName))
+            {
+                return await _ctx.Courses.Include(x=> x.Certifictes).Include(x => x.Owner).FirstAsync(x => x.Id == id);
+            }
+
+            throw new NotImplementedException(); // переписати
+        }
+
         public async Task<List<Course>> GetMyCoursesAsync(string userName)
         {
             return await _ctx.Courses.Include(x=> x.Certifictes).Where(x => x.Owner.UserName == userName).ToListAsync();

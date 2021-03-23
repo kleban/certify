@@ -22,5 +22,10 @@ namespace Certify.Repositories
             await _ctx.Certificates.AddAsync(certificate);
             await _ctx.SaveChangesAsync();
         }
+
+        public async Task<Certificate> GetAsync(string id)
+        {
+            return _ctx.Certificates.First(x=> x.Id == id);
+        }
     }
 }

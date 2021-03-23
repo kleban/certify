@@ -1,0 +1,23 @@
+﻿@model Certify.Core.Course
+
+@{
+}
+
+<h1>Сертифікати з курсу @Model.Title</h1>
+<p>@Model.Description</p>
+
+@if (Model.Certifictes.Any())
+{
+    @foreach (var c in Model.Certifictes)
+    {
+        @c.ImagePath
+        <img src="/certificate/image/@c.Id" />
+        <hr />
+    }
+}
+else
+{
+    <div class="alert alert-danger">
+        Сертифікати відсутні.
+    </div>
+}
