@@ -21,6 +21,12 @@ namespace Certify.WebApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            using (var client = new CertifyDbContext())
+            {
+                client.Database.EnsureCreated();
+                //client.Database.Migrate();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -28,14 +34,19 @@ namespace Certify.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CertifyDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("SqlServerConnection"),
-                    x => x.MigrationsAssembly("Certify.Core")));
+            /*  services.AddDbContext<CertifyDbContext>(options =>
+                  options.UseSqlServer(
+                      Configuration.GetConnectionString("SqlServerConnection"),
+                      x => x.MigrationsAssembly("Certify.Core")));*/
 
-            //options.UseSqlServer(connection, b => b.MigrationsAssembly("Certify.WebApp"))
+            services.AddEntityFrameworkSqlite().AddDbContext<CertifyDbContext>();
 
-            services.AddEntityFrameworkSqlServer();
+            /*services.AddEntityFrameworkSqlite().AddDbContext<CertifyDbContext>(
+             options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            */
+            //--options.UseSqlServer(connection, b => b.MigrationsAssembly("Certify.WebApp"))
+
+            //services.AddEntityFrameworkSqlServer();
             services.AddScoped<UserRepository>();
             services.AddScoped<CertificateRepository>();
             services.AddScoped<CourseRepository>();

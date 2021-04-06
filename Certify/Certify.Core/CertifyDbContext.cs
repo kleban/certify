@@ -1,6 +1,7 @@
 ﻿using Certify.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,20 @@ namespace Certify.Core
 {
     public class CertifyDbContext : IdentityDbContext<User, Role, string>
     {
-        public CertifyDbContext(DbContextOptions<CertifyDbContext> options)
-            : base(options)
+        public CertifyDbContext()            
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connectionStringBuilder = new SqliteConnectionStringBuilder 
+            { 
+                DataSource = "certify_db.sqlite"
+            };
+            var connectionString = connectionStringBuilder.ToString();
+            var connection = new SqliteConnection(connectionString);
+
+            optionsBuilder.UseSqlite(connection);
         }
 
         public DbSet<Course> Courses { get; set; }
