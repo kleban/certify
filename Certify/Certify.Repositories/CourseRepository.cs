@@ -22,6 +22,15 @@ namespace Certify.Repositories
             return _ctx.Courses.Any();
         }
 
+        public int Create(Course course, string userName)
+        {
+            course.Owner = _ctx.Users.First(x => x.UserName == userName);
+            var newCourse = _ctx.Courses.AddAsync(course).Result;
+            _ctx.SaveChanges();
+
+            return newCourse.Entity.Id;
+        }
+
         public async Task<int> CreateAsync(Course course, string userName)
         {
             course.Owner = _ctx.Users.First(x => x.UserName == userName);

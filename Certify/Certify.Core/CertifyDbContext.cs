@@ -17,7 +17,6 @@ namespace Certify.Core
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Course>().HasOne(x => x.Owner).WithMany(x => x.CoursesCreated);

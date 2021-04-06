@@ -15,7 +15,6 @@ namespace Certify.WebApp.Controllers
     {
         private readonly CourseRepository _courseRepository;
         private readonly CertificateRepository _certificateRepository;
-
         public InitController(CourseRepository courseRepository, CertificateRepository certificateRepository)
         {
             _courseRepository = courseRepository;

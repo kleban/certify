@@ -13,7 +13,6 @@ namespace Certify.WebApp.Controllers
     public class CourseController : Controller
     {
         private readonly CourseRepository _courseRepository;
-
         public CourseController(CourseRepository courseRepository)
         {
             _courseRepository = courseRepository;
