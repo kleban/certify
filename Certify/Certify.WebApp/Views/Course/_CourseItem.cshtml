@@ -1,0 +1,24 @@
+﻿@model Certify.Core.Course
+
+<div class="col-md-3">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                @Model.Title
+            </div>
+        </div>
+        <div class="card-body">
+            @Model.StartDate.ToString("dd.MM.yyyy") - @Model.EndDate.ToString("dd.MM.yyyy")<br />
+          @if(!string.IsNullOrEmpty(Model.Description))
+            {
+                <hr />
+                @Model.Description
+            }
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-block btn-primary"><i class="fas fa-check"></i> Text</a>
+            <a href="#" class="btn btn-block btn-success"><i class="fas fa-check"></i> Text</a>
+            <a href="#" class="btn btn-block btn-danger"><i class="fas fa-check"></i> Text</a>
+        </div>
+    </div>
+</div>

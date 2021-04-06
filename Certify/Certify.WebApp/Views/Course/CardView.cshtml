@@ -1,0 +1,22 @@
+﻿@model List<Certify.Core.Course>
+
+@{
+}
+<a href="/course/create" class="btn btn-dark float-right"><i class="fas fa-plus"></i> Додати</a>
+<h2>Мої курси</h2>
+<hr />
+<div class="row">
+    @if (Model.Any())
+    {
+        @foreach (var c in Model)
+        {
+            <partial name="_CourseItem" model="c" />
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            Курси відсутні.
+        </div>
+    }
+</div>

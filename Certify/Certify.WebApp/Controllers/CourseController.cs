@@ -18,8 +18,13 @@ namespace Certify.WebApp.Controllers
             _courseRepository = courseRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string view = "table")
         {
+            view = view.Trim().ToLower();
+
+            if(view == "card")
+                return View("CardView", await _courseRepository.GetMyCoursesAsync(User.Identity.Name));
+
             return View(await _courseRepository.GetMyCoursesAsync(User.Identity.Name));
         }
 
