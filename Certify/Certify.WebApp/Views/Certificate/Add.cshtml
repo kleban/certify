@@ -1,0 +1,67 @@
+﻿@model Certify.Core.Certificate
+
+@{
+    var courses = ViewBag.Courses as List<Certify.Core.Course>;
+}
+
+<h1>Додати курс</h1>
+
+<form asp-action="Add">
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="StudentFirstName" class="control-label"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input asp-for="StudentFirstName" class="form-control" />
+            <small asp-validation-for="StudentFirstName" class="text-danger"></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="StudentLastName" class="control-label"></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <input asp-for="StudentLastName" class="form-control" />
+            <small asp-validation-for="StudentLastName" class="text-danger"></small>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Course" class="control-label"></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <select class="form-control" name="courseId">
+                @foreach (var c in courses)
+                {
+                    <option value="@c.Id">@c.Title</option>
+                }
+            </select>
+            <small asp-validation-for="Course" class="text-danger"></small>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-book-open"></i> Створити</button>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

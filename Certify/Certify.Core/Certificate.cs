@@ -11,6 +11,7 @@ namespace Certify.Core
     public class Certificate
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public Course Course { get; set; }
         public User Student { get; set; }

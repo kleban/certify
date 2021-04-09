@@ -1,4 +1,5 @@
-﻿using Certify.Repositories;
+﻿using Certify.Core;
+using Certify.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -30,6 +31,22 @@ namespace Certify.WebApp.Controllers
         {
             var course = await _courseRepository.GetFullCourseAsync(id, User.Identity.Name);
             return View(course);
+        }
+
+        public async Task<IActionResult> Add()
+        {
+            ViewBag.Courses = await _courseRepository.GetMyCoursesAsync(User.Identity.Name);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Certificate model, int courseId)
+        {
+            if(ModelState.IsValid)
+            {
+                await _certificateRepository.CreateAsync(model, courseId);
+            }
+            return RedirectToAction("Details", "Course", new { id = courseId });
         }
 
         [HttpGet]

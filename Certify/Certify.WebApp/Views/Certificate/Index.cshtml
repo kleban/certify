@@ -10,6 +10,7 @@
 {
     @foreach (var c in Model.Certifictes)
     {
+        @c.StudentFirstName 
         @c.ImagePath
         <img src="/certificate/image/@c.Id" />
         <hr />
